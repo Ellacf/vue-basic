@@ -1,33 +1,28 @@
 <template>
   <div id="app">
     <img class="logo" src="./assets/logo.png">
-    <hello></hello>
     <p>
       Welcome to your Vue.js app!
     </p>
+    <!-- <p>{{ message }}</p>
+    <input v-model="message"> -->
     <p>
-      To get a better understanding of how this boilerplate works, check out
-      <a href="http://vuejs-templates.github.io/webpack" target="_blank">its documentation</a>.
-      It is also recommended to go through the docs for
-      <a href="http://webpack.github.io/" target="_blank">Webpack</a> and
-      <a href="http://vuejs.github.io/vue-loader/" target="_blank">vue-loader</a>.
-      If you have any issues with the setup, please file an issue at this boilerplate's
-      <a href="https://github.com/vuejs-templates/webpack" target="_blank">repository</a>.
+        <!-- 使用指令 v-link 进行导航。 -->
+      <a v-link="{ path: '/foo' }">Go to Foo</a>
+      <a v-link="{ path: '/bar' }">Go to Bar</a>
     </p>
-    <p>
-      You may also want to checkout
-      <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
-      <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
-    </p>
+    <!-- 路由外链 -->
+    <!-- main view -->
+    <router-view class="vm"></router-view>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
 export default {
-  components: {
-    Hello
+  data () {
+    return {
+      message: 'Hewll'
+    }
   }
 }
 </script>
@@ -38,7 +33,7 @@ html {
 }
 
 body {
-  display: flex;
+  // display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
@@ -46,8 +41,7 @@ body {
 
 #app {
   color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
+  // max-width: 600px;
   font-family: Source Sans Pro, Helvetica, sans-serif;
   text-align: center;
 }
@@ -60,5 +54,14 @@ body {
 .logo {
   width: 100px;
   height: 100px
+}
+
+.vm {
+  background-color: #f6f6ef;
+  width: 100%;
+  -webkit-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+  box-sizing: border-box;
+  padding: 8px 20px;
 }
 </style>
