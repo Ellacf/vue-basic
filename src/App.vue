@@ -6,23 +6,52 @@
     </p>
     <!-- <p>{{ message }}</p>
     <input v-model="message"> -->
-    <p>
-        <!-- 使用指令 v-link 进行导航。 -->
+    <!-- 使用指令 v-link 进行导航。 -->
+    <!-- <p>
       <a v-link="{ path: '/foo' }">Go to Foo</a>
-      <a v-link="{ path: '/bar' }">Go to Bar</a>
+      <a v-link="{ path: '/bar', activeClass: 'custom-active-class', append: true  }">Go to Bar</a>
     </p>
+    <p></p>
+    <a v-link="{ name: 'user', params: { userId: 123 },replace: true}">User</a>
+    <div>
+      <p>当前路径: {{$route.path}}</p>
+      <p>当前路由参数: {{$route.params | json}}</p>
+    </div> -->
     <!-- 路由外链 -->
     <!-- main view -->
     <router-view class="vm"></router-view>
-  </div>
+    <!-- <input type="checkbox" v-model="checked">
+    <label for="checked">Open only one at a time.</label>
+
+    <accordion :one-at-atime="checked">
+      <panel header="Panel #1" :is-open="true">
+        ...11111
+      </panel>
+      <panel header="Panel #2">
+        ...22222
+      </panel>
+      <panel header="Panel #3">
+        ...33333
+      </panel>
+      <panel header="Panel #4">
+        ...44444
+      </panel>
+    </accordion> -->
 </template>
 
 <script>
+var accordion = require('vue-strap').accordion;
+var panel = require('vue-strap').panel;
+
 export default {
   data () {
     return {
-      message: 'Hewll'
+      message: 'Hewll',
+      checked: true
     }
+  },
+  components: {
+    accordion,panel
   }
 }
 </script>
@@ -63,5 +92,11 @@ body {
   transition: opacity 0.2s ease;
   box-sizing: border-box;
   padding: 8px 20px;
+}
+.v-link-active{
+  background-color: red;
+}
+.custom-active-class{
+  background-color: blue;
 }
 </style>

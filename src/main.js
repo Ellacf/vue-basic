@@ -3,11 +3,14 @@ import VueRouter from 'vue-router'
 import { domain, fromNow } from './filters'
 import App from './App'
 import Hello from './components/Hello'
+import Accordion from './components/Accordion'
+import MyComponent from './components/MyComponent'
 // import Foo from './components/Foo'
 import Bar from './components/Bar'
 import Baz from './components/Baz'
 import NewsView from './components/NewsView'
-
+import '../bower_components/jquery/dist/jquery.min.js'
+import '../bower_components/bootstrap/dist/css/bootstrap.min.css'
 // install router
 Vue.use(VueRouter)
 
@@ -22,8 +25,46 @@ var Foo = Vue.extend({
     '</div>'
 })
 // routing
-var router = new VueRouter()
+var router = new VueRouter({hashbang: true})
 router.map({
+  '/accordion': {
+    component: Accordion
+  },
+  // 动态加载组件
+  '/async': {
+    component: function (resolve) {
+      // somehow retrieve your component definition from server...
+      // setTimeout(function () {
+      //   console.log('ctesvsvnnnnn')
+      // }, 2000)
+      require(['./components/MyComponent.vue'], resolve)
+      // resolve(MyComponent)
+    }
+  },
+  '/user/:userId': {
+    name: 'user', // 给这条路径加上一个名字
+    component: Hello
+  },
+  '/user/*any': {
+    component: {
+      template: '<p>贪心匹配{{$route.params.any}}</p>'
+    }
+  },
+  '/foo/*any/bar': {
+    component: {
+      template: '<p>全匹配片段{{$route.params.any}}</p>'
+    }
+  },
+  // '/user/:username': {
+  //   component: {
+  //     template: '<p>用户名是{{$route.params.username}}</p>'
+  //   }
+  // },
+  '/user/:username/post/:post_id': {
+    component: {
+      template: '<p>用户名是{{$route.params.username}},用户ID是{{$route.params.post_id}}</p>'
+    }
+  },
   '/foo': {
     component: Foo,
     // 在/foo下设置一个子路由
@@ -62,4 +103,5 @@ router.beforeEach(function () {
 router.redirect({
   '*': '/hello'
 })
+
 router.start(App, '#main')

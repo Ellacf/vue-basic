@@ -5,6 +5,7 @@
 </template>
 
 <script>
+var alert = require('vue-strap').alert;
 export default {
   data () {
     return {
@@ -14,6 +15,9 @@ export default {
       // its initial state.
       msg: 'This is Bar!'
     }
+  },
+  components: {
+    alert
   }
 }
 </script>

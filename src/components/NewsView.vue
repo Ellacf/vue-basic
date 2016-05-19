@@ -27,7 +27,21 @@ export default {
     }
   },
   route: {
+    activate: function (transition) {
+
+      console.log('hook-example activated!')
+      return store.fetchItemsByPage(this.page).then(items => {
+        this.items = items
+      })
+      // setTimeout(transition.next, 2000)
+      // transition.next()
+    },
+    deactivate: function (transition) {
+      console.log('hook-example deactivated!')
+      transition.next()
+    },
     data ({ to }) {
+      console.log("data")
       // This is the route data hook. It gets called every time the route
       // changes while this component is active.
       //
@@ -42,7 +56,7 @@ export default {
       //    the entire object, because we don't want to update the page before
       //    the items are fetched.
       const page = +to.params.page
-      document.title = '测试开发'
+      document.title = 'vue测试开发'
       return store.fetchItemsByPage(page).then(items => ({
         page,
         items
