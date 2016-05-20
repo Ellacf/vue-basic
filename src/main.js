@@ -4,6 +4,7 @@ import { domain, fromNow } from './filters'
 import App from './App'
 import Hello from './components/Hello'
 import Accordion from './components/Accordion'
+import Affix from './components/Affix'
 import MyComponent from './components/MyComponent'
 // import Foo from './components/Foo'
 import Bar from './components/Bar'
@@ -27,6 +28,9 @@ var Foo = Vue.extend({
 // routing
 var router = new VueRouter({hashbang: true})
 router.map({
+  '/affix': {
+    component: Affix
+  },
   '/accordion': {
     component: Accordion
   },
